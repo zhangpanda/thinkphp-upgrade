@@ -22,7 +22,8 @@ final class MigrateCommand extends Command
             ->setDescription('Transform code + syntax check + generate migration report')
             ->addArgument('path', InputArgument::REQUIRED, 'Project path')
             ->addOption('target', 't', InputOption::VALUE_REQUIRED, 'Target version', '8.0')
-            ->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Report output file (json)', 'phplift-report.json');
+            ->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Report output file (json)', 'phplift-report.json')
+            ->addOption('write', 'w', InputOption::VALUE_NONE, 'Actually write transformed files (default is dry-run)');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -30,6 +31,7 @@ final class MigrateCommand extends Command
         $path = $input->getArgument('path');
         $target = $input->getOption('target');
         $reportFile = $input->getOption('output');
+        $dryRun = !$input->getOption('write');
 
         if (!is_dir($path)) {
             $output->writeln("<error>❌ Directory not found: {$path}</error>");
@@ -48,6 +50,9 @@ final class MigrateCommand extends Command
 
         $output->writeln("📋 Source: {$profile->framework->name} {$profile->framework->version}");
         $output->writeln("📋 Target: {$target}");
+        if ($dryRun) {
+            $output->writeln("<comment>📋 Mode: dry-run (use --write to apply changes)</comment>");
+        }
 
         // 2. 计算路径
         $steps = MigrationPlan::compute($profile->framework->version, $target);
@@ -58,6 +63,7 @@ final class MigrateCommand extends Command
 
         $allRules = [];
         foreach ($steps as $step) {
+            $output->writeln("  → {$step->label()} (" . count($step->rules) . " rules)");
             $allRules = array_merge($allRules, $step->rules);
         }
 
@@ -90,7 +96,7 @@ final class MigrateCommand extends Command
 
         foreach ($finder as $file) {
             $report['files_scanned']++;
-            $result = $transformer->transformFile($file->getRealPath(), $allRules, true);
+            $result = $transformer->transformFile($file->getRealPath(), $allRules, $dryRun);
 
             if (!$result->changed) {
                 continue;
