@@ -109,7 +109,14 @@ final class MigrateCommand extends Command
 
             // 语法检查
             $tmp = tempnam(sys_get_temp_dir(), 'phplift_lint_');
-            @file_put_contents($tmp, $result->newCode);
+            if ($tmp === false) {
+                $report['syntax_errors'][] = [
+                    'file' => $relativePath,
+                    'error' => 'Failed to create temp file for syntax check',
+                ];
+                continue;
+            }
+            file_put_contents($tmp, $result->newCode);
             exec("php -l {$tmp} 2>&1", $lintOutput, $lintCode);
             @unlink($tmp);
 
@@ -199,9 +206,12 @@ final class MigrateCommand extends Command
         }
 
         // 5. 保存 JSON 报告
-        @file_put_contents($reportFile, json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-        $output->writeln("");
-        $output->writeln("📄 Report saved to: {$reportFile}");
+        $written = @file_put_contents($reportFile, json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        if ($written === false) {
+            $output->writeln("<error>⚠️  Failed to write report to: {$reportFile}</error>");
+        } else {
+            $output->writeln("📄 Report saved to: {$reportFile}");
+        }
 
         return $report['syntax_errors'] ? Command::FAILURE : Command::SUCCESS;
     }

@@ -32,6 +32,18 @@ final class ServeCommand extends Command
             return Command::FAILURE;
         }
 
+        // Validate port
+        if (!ctype_digit($port) || (int) $port < 1 || (int) $port > 65535) {
+            $output->writeln("<error>❌ Invalid port: {$port} (must be 1-65535)</error>");
+            return Command::FAILURE;
+        }
+
+        // Validate target version format
+        if (!preg_match('/^\d+\.\d+$/', $target)) {
+            $output->writeln("<error>❌ Invalid target version: {$target} (expected format: X.Y)</error>");
+            return Command::FAILURE;
+        }
+
         $router = __DIR__ . '/../../web/server.php';
         if (!file_exists($router)) {
             $output->writeln("<error>❌ Web server router not found</error>");
@@ -46,9 +58,17 @@ final class ServeCommand extends Command
         $output->writeln("   Press Ctrl+C to stop.");
         $output->writeln("");
 
-        $env = "PHPLIFT_PROJECT={$path} PHPLIFT_TARGET={$target}";
-        $docroot = dirname($router);
-        passthru("{$env} php -S 0.0.0.0:{$port} -t {$docroot} {$router}");
+        $docroot = escapeshellarg(dirname($router));
+        $routerArg = escapeshellarg($router);
+        $cmd = sprintf(
+            'PHPLIFT_PROJECT=%s PHPLIFT_TARGET=%s php -S 0.0.0.0:%d -t %s %s',
+            escapeshellarg($path),
+            escapeshellarg($target),
+            (int) $port,
+            $docroot,
+            $routerArg,
+        );
+        passthru($cmd);
 
         return Command::SUCCESS;
     }

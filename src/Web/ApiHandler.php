@@ -30,9 +30,11 @@ final class ApiHandler
 
     public function handle(string $uri, string $method): string
     {
+        $rawBody = file_get_contents('php://input') ?: '';
+        $body = json_decode($rawBody, true) ?? [];
+
         // CSRF protection for state-changing requests
         if ($method === 'POST') {
-            $body = json_decode(file_get_contents('php://input'), true) ?? [];
             $token = $body['_token'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? '');
             if (!hash_equals($this->csrfToken, $token)) {
                 http_response_code(403);
@@ -44,8 +46,8 @@ final class ApiHandler
             $uri === '/api/project' && $method === 'GET' => $this->getProject(),
             $uri === '/api/csrf-token' && $method === 'GET' => json_encode(['token' => $this->csrfToken]),
             $uri === '/api/changes' && $method === 'GET' => $this->getChanges(),
-            $uri === '/api/changes/confirm' && $method === 'POST' => $this->confirmChange(),
-            $uri === '/api/changes/skip' && $method === 'POST' => $this->skipChange(),
+            $uri === '/api/changes/confirm' && $method === 'POST' => $this->confirmChange($body),
+            $uri === '/api/changes/skip' && $method === 'POST' => $this->skipChange($body),
             $uri === '/api/changes/confirm-all' && $method === 'POST' => $this->confirmAll(),
             default => json_encode(['error' => 'Not found'], JSON_THROW_ON_ERROR),
         };
@@ -90,11 +92,11 @@ final class ApiHandler
         ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);
     }
 
-    private function confirmChange(): string
+    private function confirmChange(array $body): string
     {
-        $body = json_decode(file_get_contents('php://input'), true);
         $id = $body['id'] ?? null;
         if ($id === null) {
+            http_response_code(400);
             return json_encode(['error' => 'Missing id']);
         }
 
@@ -110,11 +112,11 @@ final class ApiHandler
         return json_encode(['ok' => true]);
     }
 
-    private function skipChange(): string
+    private function skipChange(array $body): string
     {
-        $body = json_decode(file_get_contents('php://input'), true);
         $id = $body['id'] ?? null;
         if ($id === null) {
+            http_response_code(400);
             return json_encode(['error' => 'Missing id']);
         }
 
@@ -225,6 +227,7 @@ final class ApiHandler
         }
         $token = bin2hex(random_bytes(32));
         file_put_contents($tokenFile, $token);
+        chmod($tokenFile, 0600);
         return $token;
     }
 }
