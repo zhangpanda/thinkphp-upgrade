@@ -52,8 +52,12 @@ final class TemplateMigrator
         $result = $this->migrate($content);
 
         if ($result->changed && !$dryRun) {
-            @file_put_contents($filePath . '.bak', $result->original);
-            @file_put_contents($filePath, $result->transformed);
+            if (@file_put_contents($filePath . '.bak', $result->original) === false) {
+                throw new \RuntimeException("Cannot create backup: {$filePath}.bak");
+            }
+            if (@file_put_contents($filePath, $result->transformed) === false) {
+                throw new \RuntimeException("Cannot write migrated file: {$filePath}");
+            }
         }
 
         return $result;

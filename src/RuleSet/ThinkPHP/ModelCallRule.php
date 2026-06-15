@@ -57,6 +57,7 @@ final class ModelCallRule implements RuleInterface
                     return null;
                 }
 
+                $modelName = ucfirst($modelName);
                 $fqcn = "app\\model\\{$modelName}";
 
                 // D() returns model instance → new \app\model\User()

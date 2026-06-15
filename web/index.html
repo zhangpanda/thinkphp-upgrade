@@ -83,7 +83,7 @@ async function loadProject() {
   const res = await fetch('/api/project');
   const data = await res.json();
   document.getElementById('stats').innerHTML = `
-    <span>📁 ${data.framework} → ${data.target}</span>
+    <span>📁 ${escapeHtml(data.framework)} → ${escapeHtml(data.target)}</span>
     <span class="pending">${data.pending} 待确认</span>
     <span class="confirmed">${data.confirmed} 已确认</span>
     <span class="skipped">${data.skipped} 已跳过</span>
@@ -108,16 +108,17 @@ async function loadChanges(status) {
 
 function renderChange(change) {
   const diff = computeDiff(change.originalCode, change.newCode);
-  const rules = change.rules.map(r => `<span class="tag">${r}</span>`).join('');
+  const rules = change.rules.map(r => `<span class="tag">${escapeHtml(r)}</span>`).join('');
+  const safeId = parseInt(change.id, 10);
   const actions = change.status === 'pending' ? `
-    <button class="btn btn-primary" onclick="confirm(${change.id})">✓ 接受</button>
-    <button class="btn btn-danger" onclick="skip(${change.id})">✗ 跳过</button>
-  ` : `<span class="tag">${change.status}</span>`;
+    <button class="btn btn-primary" onclick="confirm(${safeId})">✓ 接受</button>
+    <button class="btn btn-danger" onclick="skip(${safeId})">✗ 跳过</button>
+  ` : `<span class="tag">${escapeHtml(change.status)}</span>`;
 
   return `
-    <div class="card" id="change-${change.id}">
+    <div class="card" id="change-${safeId}">
       <div class="card-header">
-        <span class="file">📄 ${change.relativePath}</span>
+        <span class="file">📄 ${escapeHtml(change.relativePath)}</span>
         <div class="rules">${rules}</div>
       </div>
       <div class="diff">${diff}</div>
