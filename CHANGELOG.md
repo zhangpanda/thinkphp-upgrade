@@ -1,5 +1,25 @@
 # 更新日志
 
+## v0.3.0 (2026-06-15)
+
+### 新功能
+
+- **Web UI** — `phplift serve /path` 启动交互式确认界面
+  - 内置 PHP Web Server，无需 Laravel 或其他框架
+  - Diff 视图逐条展示变更，支持接受/跳过操作
+  - JSON API（/api/project、/api/changes、confirm/skip/confirm-all）
+  - 全部接受后自动写入文件（带 .bak 备份）
+
+- **模板文件迁移** — `TemplateMigrator`
+  - 转换 ThinkPHP 3.x 模板标签：volist / foreach / if / eq / neq / empty / notempty / include
+  - 转换魔术常量：`__URL__` → `{:url('/')}`、`__PUBLIC__` → `/static`、`__ROOT__` → `/`
+  - 集成到 `migrate` 命令，自动处理 .html / .tpl 文件
+  - 正则驱动，与 PHP AST 转换独立
+
+### 改进
+
+- `migrate` 命令报告中新增模板文件统计
+
 ## v0.1.0 (2026-06-10)
 
 ### 首个版本

@@ -6,6 +6,7 @@ namespace PHPLift\Console;
 
 use PHPLift\Engine\MigrationPlan;
 use PHPLift\Scanner\ProjectScanner;
+use PHPLift\Template\TemplateMigrator;
 use PHPLift\Transformer\CodeTransformer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -140,6 +141,28 @@ final class MigrateCommand extends Command
             }
         }
 
+        // 3.5 模板文件迁移
+        $templateMigrator = new TemplateMigrator();
+        $tplFinder = new Finder();
+        try {
+            $tplFinder->files()->in($path)->name(['*.html', '*.tpl'])->notPath(['vendor', 'node_modules', 'runtime']);
+            $report['templates_scanned'] = 0;
+            $report['templates_changed'] = 0;
+
+            foreach ($tplFinder as $tplFile) {
+                $report['templates_scanned']++;
+                $tplResult = $templateMigrator->migrateFile($tplFile->getRealPath(), $dryRun);
+                if ($tplResult->changed) {
+                    $report['templates_changed']++;
+                    $report['changed_files'][] = $tplFile->getRelativePathname() . ' (template)';
+                }
+            }
+        } catch (\Throwable) {
+            // No template files found — not an error
+            $report['templates_scanned'] = 0;
+            $report['templates_changed'] = 0;
+        }
+
         // 4. 输出结果
         $output->writeln("");
         $output->writeln("═══════════════════════════════════════");
@@ -150,6 +173,7 @@ final class MigrateCommand extends Command
         $output->writeln("  Syntax OK:         {$report['syntax_ok']}");
         $output->writeln("  Syntax errors:     " . count($report['syntax_errors']));
         $output->writeln("  Need manual review:" . count($report['manual_review']));
+        $output->writeln("  Templates changed: {$report['templates_changed']}/{$report['templates_scanned']}");
         $output->writeln("───────────────────────────────────────");
 
         if ($report['syntax_errors']) {

@@ -235,8 +235,8 @@ php bin/phplift analyze tests/Fixtures/tp32-sample
 - [x] 报告生成
 - [ ] ThinkPHP 5.x → 6.x 规则
 - [ ] ThinkPHP 6.x → 8.x 规则
-- [ ] Web UI（交互式确认界面）
-- [ ] 模板文件迁移
+- [x] Web UI（交互式确认界面）
+- [x] 模板文件迁移
 - [ ] 自定义规则插件系统
 - [ ] VS Code 插件
 
