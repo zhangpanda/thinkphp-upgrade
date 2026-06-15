@@ -95,11 +95,22 @@ final class MigrateIntegrationTest extends TestCase
         $result = $transformer->transformFile($file, $allRules, dryRun: true);
 
         $this->assertTrue($result->changed);
+
+        // Positive assertions: correct replacements present
         $this->assertStringContainsString('namespace ', $result->newCode);
+        $this->assertStringContainsString('\\think\\BaseController', $result->newCode);
+        $this->assertStringContainsString('\\think\\facade\\View::fetch()', $result->newCode);
+        $this->assertStringContainsString('\\think\\facade\\View::assign(', $result->newCode);
+        $this->assertStringContainsString('\\app\\model\\Goods', $result->newCode);
+        $this->assertStringContainsString('$request->get(', $result->newCode);
+
+        // Negative assertions: old patterns removed
         $this->assertStringNotContainsString("M('Goods')", $result->newCode);
         $this->assertStringNotContainsString("I('get.", $result->newCode);
         $this->assertStringNotContainsString("IS_POST", $result->newCode);
         $this->assertStringNotContainsString("C('PAGE_SIZE')", $result->newCode);
+        $this->assertStringNotContainsString('$this->display()', $result->newCode);
+        $this->assertStringNotContainsString('$this->assign(', $result->newCode);
     }
 
     public function testTemplateMigratorOnFixture(): void
