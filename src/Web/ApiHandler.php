@@ -12,18 +12,37 @@ use Symfony\Component\Finder\Finder;
 final class ApiHandler
 {
     private string $stateFile;
+    private string $csrfToken;
 
     public function __construct(
         private readonly string $projectPath,
         private readonly string $targetVersion,
     ) {
-        $this->stateFile = sys_get_temp_dir() . '/phplift_' . md5($this->projectPath) . '.json';
+        // Validate project path — must be a real directory, no traversal
+        $real = realpath($this->projectPath);
+        if ($real === false || !is_dir($real)) {
+            throw new \InvalidArgumentException("Invalid project path: {$this->projectPath}");
+        }
+
+        $this->stateFile = sys_get_temp_dir() . '/phplift_' . md5($real) . '.json';
+        $this->csrfToken = $this->loadOrCreateCsrfToken();
     }
 
     public function handle(string $uri, string $method): string
     {
+        // CSRF protection for state-changing requests
+        if ($method === 'POST') {
+            $body = json_decode(file_get_contents('php://input'), true) ?? [];
+            $token = $body['_token'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? '');
+            if (!hash_equals($this->csrfToken, $token)) {
+                http_response_code(403);
+                return json_encode(['error' => 'Invalid CSRF token']);
+            }
+        }
+
         return match (true) {
             $uri === '/api/project' && $method === 'GET' => $this->getProject(),
+            $uri === '/api/csrf-token' && $method === 'GET' => json_encode(['token' => $this->csrfToken]),
             $uri === '/api/changes' && $method === 'GET' => $this->getChanges(),
             $uri === '/api/changes/confirm' && $method === 'POST' => $this->confirmChange(),
             $uri === '/api/changes/skip' && $method === 'POST' => $this->skipChange(),
@@ -121,11 +140,16 @@ final class ApiHandler
         }
         $this->saveState($state);
 
-        // Apply confirmed changes
+        // Apply confirmed changes with path safety check
+        $realProject = realpath($this->projectPath);
         $applied = 0;
         foreach ($state['changes'] as $change) {
             if ($change['status'] === 'confirmed' && !empty($change['newCode'])) {
-                $filePath = $change['filePath'];
+                $filePath = realpath($change['filePath']);
+                // Security: ensure file is within project directory
+                if ($filePath === false || !str_starts_with($filePath, $realProject . DIRECTORY_SEPARATOR)) {
+                    continue;
+                }
                 @file_put_contents($filePath . '.bak', $change['originalCode']);
                 @file_put_contents($filePath, $change['newCode']);
                 $applied++;
@@ -191,5 +215,16 @@ final class ApiHandler
     private function saveState(array $state): void
     {
         file_put_contents($this->stateFile, json_encode($state, JSON_UNESCAPED_UNICODE));
+    }
+
+    private function loadOrCreateCsrfToken(): string
+    {
+        $tokenFile = sys_get_temp_dir() . '/phplift_csrf_' . md5($this->projectPath) . '.txt';
+        if (file_exists($tokenFile)) {
+            return file_get_contents($tokenFile);
+        }
+        $token = bin2hex(random_bytes(32));
+        file_put_contents($tokenFile, $token);
+        return $token;
     }
 }

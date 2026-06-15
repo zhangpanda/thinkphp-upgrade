@@ -63,6 +63,21 @@ body { font-family: -apple-system, "Microsoft YaHei", sans-serif; background: #f
 
 <script>
 let currentFilter = 'pending';
+let csrfToken = '';
+
+async function loadCsrf() {
+  const res = await fetch('/api/csrf-token');
+  const data = await res.json();
+  csrfToken = data.token;
+}
+
+function postJson(url, body = {}) {
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+    body: JSON.stringify({ ...body, _token: csrfToken }),
+  });
+}
 
 async function loadProject() {
   const res = await fetch('/api/project');
@@ -162,35 +177,29 @@ function escapeHtml(text) {
 }
 
 async function confirm(id) {
-  await fetch('/api/changes/confirm', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }),
-  });
+  await postJson('/api/changes/confirm', { id });
   document.getElementById(`change-${id}`)?.remove();
   loadProject();
 }
 
 async function skip(id) {
-  await fetch('/api/changes/skip', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }),
-  });
+  await postJson('/api/changes/skip', { id });
   document.getElementById(`change-${id}`)?.remove();
   loadProject();
 }
 
 async function confirmAll() {
   if (!window.confirm('确认接受所有待确认的变更并写入文件？')) return;
-  await fetch('/api/changes/confirm-all', { method: 'POST' });
+  await postJson('/api/changes/confirm-all');
   loadProject();
   loadChanges(currentFilter);
 }
 
 // Init
-loadProject();
-loadChanges('pending');
+loadCsrf().then(() => {
+  loadProject();
+  loadChanges('pending');
+});
 </script>
 </body>
 </html>
