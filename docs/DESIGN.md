@@ -1166,7 +1166,7 @@ final class TransformCommand extends Command
 
 ```bash
 # 1. 安装
-composer global require phplift/phplift
+git clone git@github.com:zhangpanda/phplift.git && cd phplift && composer install
 
 # 2. 分析项目
 phplift analyze /var/www/old-shop --target thinkphp:6.0

@@ -26,12 +26,14 @@ PHPLift 通过 **AST 分析 + 规则驱动转换 + AI 辅助** 自动完成 80%+
 ## 安装
 
 ```bash
-composer global require phplift/phplift
+git clone git@github.com:zhangpanda/phplift.git
+cd phplift
+composer install
 ```
 
-或在项目中安装：
+全局可用（可选）：
 ```bash
-composer require --dev phplift/phplift
+ln -s $(pwd)/bin/phplift /usr/local/bin/phplift
 ```
 
 ## 快速使用
