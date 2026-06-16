@@ -38,6 +38,10 @@ final class ControllerMigrationRule implements RuleInterface
                 // extends Controller → extends \think\BaseController
                 if ($node instanceof Class_ && $node->extends !== null) {
                     $parentName = $node->extends->toString();
+                    // Skip already-migrated classes
+                    if ($parentName === 'think\\BaseController' || $parentName === '\\think\\BaseController') {
+                        return null;
+                    }
                     // Only transform if extending exactly "Controller" (not Model, Service, etc.)
                     if ($parentName === 'Controller' || $parentName === 'Think\\Controller') {
                         $node->extends = new Name\FullyQualified('think\\BaseController');
@@ -64,6 +68,13 @@ final class ControllerMigrationRule implements RuleInterface
                         'assign',
                         $node->args,
                     );
+                }
+
+                // Skip if already using View:: static calls (idempotency)
+                if ($node instanceof StaticCall
+                    && $node->class instanceof Name
+                    && str_contains($node->class->toString(), 'View')) {
+                    return null;
                 }
 
                 return null;

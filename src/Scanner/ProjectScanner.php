@@ -47,7 +47,11 @@ final class ProjectScanner
             }
             $version = $composer['require']['topthink/framework'] ?? null;
             if ($version) {
-                $cleaned = trim(preg_replace('/[^0-9.]/', '', $version), '.');
+                $cleaned = preg_replace('/[^0-9.]/', '', $version);
+                if ($cleaned === null) {
+                    return new FrameworkInfo('unknown', '0.0', 0);
+                }
+                $cleaned = trim($cleaned, '.');
                 return new FrameworkInfo('thinkphp', $cleaned, 95);
             }
         }

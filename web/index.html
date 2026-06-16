@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PHPLift - Interactive Migration</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; }
+.header { background: #1a1a2e; color: #fff; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+.header h1 { font-size: 20px; }
+.header .stats { display: flex; gap: 16px; font-size: 14px; }
+.header .stats span { padding: 4px 10px; border-radius: 12px; }
+.stats .pending { background: #faad14; color: #000; }
+.stats .confirmed { background: #52c41a; color: #fff; }
+.stats .skipped { background: #ff4d4f; color: #fff; }
+.container { max-width: 1200px; margin: 24px auto; padding: 0 16px; }
+.card { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 16px; overflow: hidden; }
+.card-header { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; justify-content: space-between; }
+.card-header .file { font-family: monospace; font-size: 14px; color: #1677ff; }
+.card-header .rules { display: flex; gap: 4px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; background: #e6f4ff; color: #1677ff; }
+.diff { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: 13px; line-height: 1.6; overflow-x: auto; max-height: 400px; overflow-y: auto; }
+.diff-line { padding: 0 12px; white-space: pre; }
+.diff-line.add { background: #e6ffed; color: #22863a; }
+.diff-line.del { background: #ffeef0; color: #cb2431; }
+.diff-line.ctx { color: #666; }
+.diff-line .ln { display: inline-block; width: 40px; color: #aaa; text-align: right; margin-right: 12px; user-select: none; }
+.actions { padding: 12px 16px; border-top: 1px solid #f0f0f0; display: flex; gap: 8px; }
+.btn { border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: opacity .2s; }
+.btn:hover { opacity: 0.85; }
+.btn-primary { background: #1677ff; color: #fff; }
+.btn-danger { background: #ff4d4f; color: #fff; }
+.btn-success { background: #52c41a; color: #fff; }
+.btn-ghost { background: #f0f0f0; color: #333; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.progress { height: 4px; background: #e8e8e8; border-radius: 2px; margin-top: 8px; }
+.progress-bar { height: 100%; background: #1677ff; border-radius: 2px; transition: width 0.3s; }
+.empty { text-align: center; padding: 48px; color: #999; }
+#app { min-height: 100vh; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <h1>🔄 PHPLift</h1>
+    <div class="stats" id="stats"></div>
+  </div>
+  <div class="container">
+    <div class="toolbar">
+      <div>
+        <button class="btn btn-ghost" onclick="loadChanges('pending')">待确认</button>
+        <button class="btn btn-ghost" onclick="loadChanges('confirmed')">已确认</button>
+        <button class="btn btn-ghost" onclick="loadChanges('skipped')">已跳过</button>
+        <button class="btn btn-ghost" onclick="loadChanges('all')">全部</button>
+      </div>
+      <button class="btn btn-success" onclick="confirmAll()">✓ 全部接受并应用</button>
+    </div>
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+    <div id="changes"></div>
+  </div>
+</div>
+
+<script>
+let currentFilter = 'pending';
+let csrfToken = '';
+
+async function loadCsrf() {
+  const res = await fetch('/api/csrf-token');
+  const data = await res.json();
+  csrfToken = data.token;
+}
+
+function postJson(url, body = {}) {
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+    body: JSON.stringify({ ...body, _token: csrfToken }),
+  });
+}
+
+async function loadProject() {
+  const res = await fetch('/api/project');
+  const data = await res.json();
+  document.getElementById('stats').innerHTML = `
+    <span>📁 ${escapeHtml(data.framework)} → ${escapeHtml(data.target)}</span>
+    <span class="pending">${data.pending} 待确认</span>
+    <span class="confirmed">${data.confirmed} 已确认</span>
+    <span class="skipped">${data.skipped} 已跳过</span>
+  `;
+  const pct = data.totalChanges > 0 ? ((data.confirmed + data.skipped) / data.totalChanges * 100) : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+}
+
+async function loadChanges(status) {
+  currentFilter = status;
+  const res = await fetch(`/api/changes?status=${status}`);
+  const data = await res.json();
+  const el = document.getElementById('changes');
+
+  if (data.changes.length === 0) {
+    el.innerHTML = '<div class="empty">🎉 没有更多变更</div>';
+    return;
+  }
+
+  el.innerHTML = data.changes.map(c => renderChange(c)).join('');
+}
+
+function renderChange(change) {
+  const diff = computeDiff(change.originalCode, change.newCode);
+  const rules = change.rules.map(r => `<span class="tag">${escapeHtml(r)}</span>`).join('');
+  const safeId = parseInt(change.id, 10);
+  const actions = change.status === 'pending' ? `
+    <button class="btn btn-primary" onclick="confirm(${safeId})">✓ 接受</button>
+    <button class="btn btn-danger" onclick="skip(${safeId})">✗ 跳过</button>
+  ` : `<span class="tag">${escapeHtml(change.status)}</span>`;
+
+  return `
+    <div class="card" id="change-${safeId}">
+      <div class="card-header">
+        <span class="file">📄 ${escapeHtml(change.relativePath)}</span>
+        <div class="rules">${rules}</div>
+      </div>
+      <div class="diff">${diff}</div>
+      <div class="actions">${actions}</div>
+    </div>
+  `;
+}
+
+function computeDiff(oldCode, newCode) {
+  const oldLines = oldCode.split('\n');
+  const newLines = newCode.split('\n');
+  let html = '';
+  // Simple line-by-line diff (shows first differences context)
+  const maxLines = Math.max(oldLines.length, newLines.length);
+  const diffPairs = [];
+
+  for (let i = 0; i < maxLines; i++) {
+    const ol = oldLines[i] ?? '';
+    const nl = newLines[i] ?? '';
+    if (ol === nl) {
+      diffPairs.push({ type: 'ctx', line: i + 1, text: ol });
+    } else {
+      if (ol) diffPairs.push({ type: 'del', line: i + 1, text: ol });
+      if (nl) diffPairs.push({ type: 'add', line: i + 1, text: nl });
+    }
+  }
+
+  // Show context around changes (collapse unchanged regions)
+  const CONTEXT = 3;
+  const changed = diffPairs.map((p, i) => p.type !== 'ctx' ? i : -1).filter(i => i >= 0);
+  if (changed.length === 0) return '<div class="diff-line ctx">No differences</div>';
+
+  const visible = new Set();
+  changed.forEach(i => {
+    for (let j = Math.max(0, i - CONTEXT); j <= Math.min(diffPairs.length - 1, i + CONTEXT); j++) {
+      visible.add(j);
+    }
+  });
+
+  let lastVisible = -1;
+  for (let i = 0; i < diffPairs.length; i++) {
+    if (!visible.has(i)) continue;
+    if (lastVisible >= 0 && i - lastVisible > 1) {
+      html += `<div class="diff-line ctx"><span class="ln">...</span> ...</div>`;
+    }
+    const p = diffPairs[i];
+    const prefix = p.type === 'add' ? '+' : p.type === 'del' ? '-' : ' ';
+    html += `<div class="diff-line ${p.type}"><span class="ln">${p.line}</span>${escapeHtml(prefix + ' ' + p.text)}</div>`;
+    lastVisible = i;
+  }
+
+  return html;
+}
+
+function escapeHtml(text) {
+  return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+async function confirm(id) {
+  await postJson('/api/changes/confirm', { id });
+  document.getElementById(`change-${id}`)?.remove();
+  loadProject();
+}
+
+async function skip(id) {
+  await postJson('/api/changes/skip', { id });
+  document.getElementById(`change-${id}`)?.remove();
+  loadProject();
+}
+
+async function confirmAll() {
+  if (!window.confirm('确认接受所有待确认的变更并写入文件？')) return;
+  await postJson('/api/changes/confirm-all');
+  loadProject();
+  loadChanges(currentFilter);
+}
+
+// Init
+loadCsrf().then(() => {
+  loadProject();
+  loadChanges('pending');
+});
+</script>
+</body>
+</html>

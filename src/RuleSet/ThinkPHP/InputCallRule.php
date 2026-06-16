@@ -84,14 +84,21 @@ final class InputCallRule implements RuleInterface
                     $newArgs,
                 );
 
-                // 3rd arg is filter function: wrap as filterFunc($request->method(...))
+                // 3rd arg is filter function(s): wrap as filterFunc($request->method(...))
+                // Supports comma-separated: 'htmlspecialchars,strip_tags' → strip_tags(htmlspecialchars(...))
                 if (isset($node->args[2]) && $node->args[2]->value instanceof String_) {
-                    $filter = $node->args[2]->value->value;
-                    if ($filter !== '' && preg_match('/^[a-zA-Z_]\w*$/', $filter)) {
-                        return new FuncCall(
-                            new Name($filter),
-                            [new Arg($requestCall)],
-                        );
+                    $filterStr = $node->args[2]->value->value;
+                    if ($filterStr !== '') {
+                        $filters = array_filter(array_map('trim', explode(',', $filterStr)));
+                        $result = $requestCall;
+                        foreach ($filters as $f) {
+                            if (preg_match('/^[a-zA-Z_]\w*$/', $f)) {
+                                $result = new FuncCall(new Name($f), [new Arg($result)]);
+                            }
+                        }
+                        if ($result !== $requestCall) {
+                            return $result;
+                        }
                     }
                 }
 

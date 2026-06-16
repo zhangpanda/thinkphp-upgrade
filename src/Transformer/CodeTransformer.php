@@ -54,7 +54,9 @@ final class CodeTransformer
         $changed = $newCode !== $baseline;
 
         if ($changed && !$dryRun) {
-            @file_put_contents($filePath . '.bak', $originalCode);
+            if (@file_put_contents($filePath . '.bak', $originalCode) === false) {
+                throw new \RuntimeException("Cannot create backup: {$filePath}.bak");
+            }
             if (@file_put_contents($filePath, $newCode) === false) {
                 throw new \RuntimeException("Cannot write file: {$filePath}");
             }

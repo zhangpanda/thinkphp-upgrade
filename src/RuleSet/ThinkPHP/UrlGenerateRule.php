@@ -50,6 +50,12 @@ final class UrlGenerateRule implements RuleInterface
                     return null;
                 }
 
+                // Separate query string: U('User/add?id=1') → path='User/add', query='id=1'
+                $query = '';
+                if (str_contains($oldUrl, '?')) {
+                    [$oldUrl, $query] = explode('?', $oldUrl, 2);
+                }
+
                 $parts = explode('/', $oldUrl);
 
                 // TP3: Module/Controller/Action → controller/action (drop module)
@@ -61,6 +67,10 @@ final class UrlGenerateRule implements RuleInterface
                     1 => strtolower($parts[0]),
                     default => strtolower($oldUrl),
                 };
+
+                if ($query !== '') {
+                    $newUrl .= '?' . $query;
+                }
 
                 $newArgs = [new Arg(new String_($newUrl))];
 

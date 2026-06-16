@@ -26,12 +26,14 @@ PHPLift 通过 **AST 分析 + 规则驱动转换 + AI 辅助** 自动完成 80%+
 ## 安装
 
 ```bash
-composer global require phplift/phplift
+git clone git@github.com:zhangpanda/phplift.git
+cd phplift
+composer install
 ```
 
-或在项目中安装：
+全局可用（可选）：
 ```bash
-composer require --dev phplift/phplift
+ln -s $(pwd)/bin/phplift /usr/local/bin/phplift
 ```
 
 ## 快速使用
@@ -233,10 +235,10 @@ php bin/phplift analyze tests/Fixtures/tp32-sample
 - [x] CLI 工具（analyze + transform）
 - [x] AI 辅助模块
 - [x] 报告生成
-- [ ] ThinkPHP 5.x → 6.x 规则
-- [ ] ThinkPHP 6.x → 8.x 规则
-- [ ] Web UI（交互式确认界面）
-- [ ] 模板文件迁移
+- [x] ThinkPHP 5.x → 6.x 规则
+- [x] ThinkPHP 6.x → 8.x 规则
+- [x] Web UI（交互式确认界面）
+- [x] 模板文件迁移
 - [ ] 自定义规则插件系统
 - [ ] VS Code 插件
 

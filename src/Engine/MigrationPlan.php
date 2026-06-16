@@ -89,10 +89,14 @@ final class MigrationPlan
         $parts = explode('.', $v);
         $result = $parts[0] . '.' . ($parts[1] ?? '0');
 
-        // TP5.0 和 TP5.1 迁移路径相同
-        if ($result === '5.0') {
-            $result = '5.1';
-        }
+        // Canonical version mapping
+        $canonicalMap = [
+            '3.0' => '3.2', '3.1' => '3.2',
+            '5.0' => '5.1',
+            '6.1' => '6.0', '6.2' => '6.0',
+            '8.1' => '8.0',
+        ];
+        $result = $canonicalMap[$result] ?? $result;
 
         return $result;
     }

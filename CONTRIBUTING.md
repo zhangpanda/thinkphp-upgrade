@@ -5,7 +5,7 @@
 ## 开发环境
 
 ```bash
-git clone https://github.com/phplift/phplift.git
+git clone https://github.com/zhangpanda/phplift.git
 cd phplift
 composer install
 ```
