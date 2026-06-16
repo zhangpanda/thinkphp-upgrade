@@ -19,6 +19,22 @@
 ### 改进
 
 - `migrate` 命令报告中新增模板文件统计
+- ConfigCallRule KEY_MAP 从 8 条扩展到 20 条（覆盖 session/cache/app/route）
+- InputCallRule 支持逗号分隔多过滤器（`'htmlspecialchars,strip_tags'`）
+- UrlGenerateRule 正确处理带 query string 的 URL（`U('User/add?id=1')`）
+- ModelCallRule 自动 ucfirst 确保 PSR-4 类名合规
+- ControllerMigrationRule 幂等性（跳过已迁移的类）
+- MigrationPlan 版本规范化别名（3.0→3.2, 6.1→6.0, 8.1→8.0）
+
+### 安全加固
+
+- ServeCommand：`escapeshellarg()` 全参数转义 + 端口/版本格式校验
+- Web UI：CSRF token 防护 + 路径穿越防御 + XSS 修复
+- ApiHandler：`php://input` 单次读取、HTTP 状态码规范、写入失败检查
+- OpenAIProvider：SSL 强制验证 + 1MB 响应大小限制
+- CodeTransformer/TemplateMigrator：备份写入失败抛异常
+- MigrateCommand：`tempnam()` 失败检查、报告写入失败提示
+- SECURITY.md：漏洞报告流程 + API 稳定性声明
 
 ## v0.1.0 (2026-06-10)
 

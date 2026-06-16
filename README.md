@@ -233,8 +233,8 @@ php bin/phplift analyze tests/Fixtures/tp32-sample
 - [x] CLI 工具（analyze + transform）
 - [x] AI 辅助模块
 - [x] 报告生成
-- [ ] ThinkPHP 5.x → 6.x 规则
-- [ ] ThinkPHP 6.x → 8.x 规则
+- [x] ThinkPHP 5.x → 6.x 规则
+- [x] ThinkPHP 6.x → 8.x 规则
 - [x] Web UI（交互式确认界面）
 - [x] 模板文件迁移
 - [ ] 自定义规则插件系统
