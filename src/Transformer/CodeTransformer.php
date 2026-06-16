@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Transformer;
+namespace ThinkUpgrade\Transformer;
 
 use PhpParser\Error;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter\Standard;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 final class CodeTransformer
 {

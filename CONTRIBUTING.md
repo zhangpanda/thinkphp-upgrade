@@ -26,9 +26,9 @@ vendor/bin/phpunit
 <?php
 // src/RuleSet/ThinkPHP/YourRule.php
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 final class YourRule implements RuleInterface
 {

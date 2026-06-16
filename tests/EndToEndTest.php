@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests;
+namespace ThinkUpgrade\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\RuleSet\ThinkPHP\AddNamespaceRule;
-use PHPLift\RuleSet\ThinkPHP\ConfigCallRule;
-use PHPLift\RuleSet\ThinkPHP\ControllerMigrationRule;
-use PHPLift\RuleSet\ThinkPHP\ModelCallRule;
-use PHPLift\RuleSet\ThinkPHP\UrlGenerateRule;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\RuleSet\ThinkPHP\AddNamespaceRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\ConfigCallRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\ControllerMigrationRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\ModelCallRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\UrlGenerateRule;
+use ThinkUpgrade\Transformer\CodeTransformer;
 
 final class EndToEndTest extends TestCase
 {

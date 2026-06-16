@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 use PhpParser\Node;
 use PhpParser\Node\Name as NodeName;
 use PhpParser\Node\Stmt;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * Adds a namespace to TP3 files that lack one.

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Console;
+namespace ThinkUpgrade\Console;
 
-use PHPLift\Engine\MigrationPlan;
-use PHPLift\Scanner\ProjectScanner;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\Engine\MigrationPlan;
+use ThinkUpgrade\Scanner\ProjectScanner;
+use ThinkUpgrade\Transformer\CodeTransformer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

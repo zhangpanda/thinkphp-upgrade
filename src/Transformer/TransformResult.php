@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Transformer;
+namespace ThinkUpgrade\Transformer;
 
 final readonly class TransformResult
 {

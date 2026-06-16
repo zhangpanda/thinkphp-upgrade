@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Console;
+namespace ThinkUpgrade\Console;
 
-use PHPLift\Engine\MigrationPlan;
-use PHPLift\Scanner\ProjectScanner;
-use PHPLift\Template\TemplateMigrator;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\Engine\MigrationPlan;
+use ThinkUpgrade\Scanner\ProjectScanner;
+use ThinkUpgrade\Template\TemplateMigrator;
+use ThinkUpgrade\Transformer\CodeTransformer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -173,7 +173,7 @@ final class MigrateCommand extends Command
         // 4. 输出结果
         $output->writeln("");
         $output->writeln("═══════════════════════════════════════");
-        $output->writeln("  PHPLift Migration Report");
+        $output->writeln("  ThinkUpgrade Migration Report");
         $output->writeln("═══════════════════════════════════════");
         $output->writeln("  Files scanned:     {$report['files_scanned']}");
         $output->writeln("  Files changed:     {$report['files_changed']}");

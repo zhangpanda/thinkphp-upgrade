@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet\ThinkPHP\Tp6ToTp8;
+namespace ThinkUpgrade\RuleSet\ThinkPHP\Tp6ToTp8;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
@@ -11,7 +11,7 @@ use PhpParser\Node\Identifier;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * Adds type declarations to untyped properties based on default values:

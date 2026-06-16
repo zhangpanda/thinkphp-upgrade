@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests;
+namespace ThinkUpgrade\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\Engine\MigrationPlan;
-use PHPLift\RuleSet\ThinkPHP\Tp5ToTp6\ContainerAccessRule;
-use PHPLift\RuleSet\ThinkPHP\Tp5ToTp6\FacadeImportRule;
-use PHPLift\RuleSet\ThinkPHP\Tp5ToTp6\ModuleRemovalRule;
-use PHPLift\RuleSet\ThinkPHP\Tp6ToTp8\ConstructorPromotionRule;
-use PHPLift\RuleSet\ThinkPHP\Tp6ToTp8\MatchExpressionRule;
-use PHPLift\RuleSet\ThinkPHP\Tp6ToTp8\TypedPropertyRule;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\Engine\MigrationPlan;
+use ThinkUpgrade\RuleSet\ThinkPHP\Tp5ToTp6\ContainerAccessRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\Tp5ToTp6\FacadeImportRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\Tp5ToTp6\ModuleRemovalRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\Tp6ToTp8\ConstructorPromotionRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\Tp6ToTp8\MatchExpressionRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\Tp6ToTp8\TypedPropertyRule;
+use ThinkUpgrade\Transformer\CodeTransformer;
 
 final class MigrationPlanTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet;
+namespace ThinkUpgrade\RuleSet;
 
 use PhpParser\NodeVisitorAbstract;
 

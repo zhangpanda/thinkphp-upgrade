@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests;
+namespace ThinkUpgrade\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\Scanner\FrameworkInfo;
-use PHPLift\Scanner\ProjectProfile;
-use PHPLift\Scanner\ProjectScanner;
+use ThinkUpgrade\Scanner\FrameworkInfo;
+use ThinkUpgrade\Scanner\ProjectProfile;
+use ThinkUpgrade\Scanner\ProjectScanner;
 
 final class ScannerTest extends TestCase
 {

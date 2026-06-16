@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Console;
+namespace ThinkUpgrade\Console;
 
-use PHPLift\Analyzer\CodeAnalyzer;
-use PHPLift\RuleSet\ThinkPHP\ConfigCallRule;
-use PHPLift\RuleSet\ThinkPHP\InputCallRule;
-use PHPLift\RuleSet\ThinkPHP\IsPostRule;
-use PHPLift\RuleSet\ThinkPHP\ModelCallRule;
-use PHPLift\RuleSet\ThinkPHP\UrlGenerateRule;
-use PHPLift\Scanner\ProjectScanner;
+use ThinkUpgrade\Analyzer\CodeAnalyzer;
+use ThinkUpgrade\RuleSet\ThinkPHP\ConfigCallRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\InputCallRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\IsPostRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\ModelCallRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\UrlGenerateRule;
+use ThinkUpgrade\Scanner\ProjectScanner;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

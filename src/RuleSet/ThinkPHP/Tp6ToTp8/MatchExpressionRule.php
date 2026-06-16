@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet\ThinkPHP\Tp6ToTp8;
+namespace ThinkUpgrade\RuleSet\ThinkPHP\Tp6ToTp8;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Match_;
@@ -11,7 +11,7 @@ use PhpParser\Node\Stmt\Break_;
 use PhpParser\Node\Stmt\Return_;
 use PhpParser\Node\Stmt\Switch_;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * Converts simple switch/case to PHP 8 match expression.

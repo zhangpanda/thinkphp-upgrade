@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Engine;
+namespace ThinkUpgrade\Engine;
 
-use PHPLift\RuleSet\RuleInterface;
-use PHPLift\RuleSet\ThinkPHP;
+use ThinkUpgrade\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\ThinkPHP;
 
 /**
  * Computes the migration path between any two ThinkPHP versions

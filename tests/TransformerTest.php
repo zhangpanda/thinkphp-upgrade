@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests;
+namespace ThinkUpgrade\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\RuleSet\ThinkPHP\ConfigCallRule;
-use PHPLift\RuleSet\ThinkPHP\ModelCallRule;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\RuleSet\ThinkPHP\ConfigCallRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\ModelCallRule;
+use ThinkUpgrade\Transformer\CodeTransformer;
 
 final class TransformerTest extends TestCase
 {

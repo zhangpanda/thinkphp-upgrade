@@ -75,7 +75,7 @@
 ```php
 <?php
 
-namespace PHPLift\Scanner;
+namespace ThinkUpgrade\Scanner;
 
 final class ProjectScanner
 {
@@ -169,11 +169,11 @@ private function detectThinkPHPVersion(string $path): ?string
 ```php
 <?php
 
-namespace PHPLift\Analyzer;
+namespace ThinkUpgrade\Analyzer;
 
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 final class CodeAnalyzer
 {
@@ -268,7 +268,7 @@ enum IssueSeverity: string
 ```php
 <?php
 
-namespace PHPLift\Transformer;
+namespace ThinkUpgrade\Transformer;
 
 use PhpParser\NodeTraverser;
 use PhpParser\PrettyPrinter\Standard;
@@ -368,7 +368,7 @@ final readonly class TransformOptions
 ```php
 <?php
 
-namespace PHPLift\RuleSet;
+namespace ThinkUpgrade\RuleSet;
 
 use PhpParser\NodeVisitorAbstract;
 
@@ -428,13 +428,13 @@ final class RuleSetLoader
 ```php
 <?php
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * 将 TP3 的 M('User') 转换为 TP6 的 \app\model\User::class 静态调用
@@ -492,7 +492,7 @@ final class ModelCallRule implements RuleInterface
 ```php
 <?php
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 /**
  * 将 TP3 的 C('DB_HOST') 转换为 TP6 的 config('database.connections.mysql.hostname')
@@ -566,7 +566,7 @@ final class ConfigCallRule implements RuleInterface
 ```php
 <?php
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 /**
  * 将 TP3 的 U('Module/Controller/action') 转换为 TP6 的 url('controller/action')
@@ -633,7 +633,7 @@ final class UrlGenerateRule implements RuleInterface
 ```php
 <?php
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 /**
  * 为 TP3 无命名空间的类添加命名空间
@@ -707,7 +707,7 @@ final class AddNamespaceRule implements RuleInterface
 ```php
 <?php
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 /**
  * TP3: class UserController extends Controller
@@ -782,7 +782,7 @@ final class ControllerMigrationRule implements RuleInterface
 ```php
 <?php
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 /**
  * TP3 使用 .class.php 后缀:
@@ -833,7 +833,7 @@ final class FileRenameRule implements RuleInterface
 ```php
 <?php
 
-namespace PHPLift\AI;
+namespace ThinkUpgrade\AI;
 
 interface AIProviderInterface
 {
@@ -974,7 +974,7 @@ final class AIAssistManager
 ```php
 <?php
 
-namespace PHPLift\Reporter;
+namespace ThinkUpgrade\Reporter;
 
 interface ReporterInterface
 {
@@ -1107,7 +1107,7 @@ Step 4 — 交互确认（Monaco Diff Editor）
 ```php
 <?php
 
-namespace PHPLift\Console;
+namespace ThinkUpgrade\Console;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -1333,7 +1333,7 @@ thinkphp-upgrade/
     },
     "autoload": {
         "psr-4": {
-            "PHPLift\\": "src/"
+            "ThinkUpgrade\\": "src/"
         }
     }
 }

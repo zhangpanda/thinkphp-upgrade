@@ -98,7 +98,7 @@ Templates changed: 45/120
 ### 编程方式调用
 
 ```php
-use PHPLift\Template\TemplateMigrator;
+use ThinkUpgrade\Template\TemplateMigrator;
 
 $migrator = new TemplateMigrator();
 

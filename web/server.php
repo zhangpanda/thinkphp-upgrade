@@ -25,7 +25,7 @@ if (str_starts_with($uri, '/api/')) {
         exit;
     }
 
-    $handler = new \PHPLift\Web\ApiHandler(
+    $handler = new \ThinkUpgrade\Web\ApiHandler(
         projectPath: getenv('PHPLIFT_PROJECT') ?: '',
         targetVersion: getenv('PHPLIFT_TARGET') ?: '8.0',
     );

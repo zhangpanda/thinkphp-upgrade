@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Web;
+namespace ThinkUpgrade\Web;
 
-use PHPLift\Engine\MigrationPlan;
-use PHPLift\Scanner\ProjectScanner;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\Engine\MigrationPlan;
+use ThinkUpgrade\Scanner\ProjectScanner;
+use ThinkUpgrade\Transformer\CodeTransformer;
 use Symfony\Component\Finder\Finder;
 
 final class ApiHandler

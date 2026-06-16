@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Template;
+namespace ThinkUpgrade\Template;
 
 /**
  * Migrates ThinkPHP 3.x template syntax to ThinkPHP 6.x/8.x native syntax.

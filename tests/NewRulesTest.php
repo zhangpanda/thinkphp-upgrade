@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests;
+namespace ThinkUpgrade\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\RuleSet\ThinkPHP\InputCallRule;
-use PHPLift\RuleSet\ThinkPHP\IsPostRule;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\RuleSet\ThinkPHP\InputCallRule;
+use ThinkUpgrade\RuleSet\ThinkPHP\IsPostRule;
+use ThinkUpgrade\Transformer\CodeTransformer;
 
 final class NewRulesTest extends TestCase
 {

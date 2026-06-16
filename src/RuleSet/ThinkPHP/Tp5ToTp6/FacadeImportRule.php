@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet\ThinkPHP\Tp5ToTp6;
+namespace ThinkUpgrade\RuleSet\ThinkPHP\Tp5ToTp6;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Name;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * Convert known TP5 helper functions to Facade static calls:

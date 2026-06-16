@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests;
+namespace ThinkUpgrade\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\Engine\MigrationPlan;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\Engine\MigrationPlan;
+use ThinkUpgrade\Transformer\CodeTransformer;
 
 /**
  * Tests the full TP3→TP5→TP6→TP8 migration chain.

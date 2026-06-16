@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Scanner;
+namespace ThinkUpgrade\Scanner;
 
 use Symfony\Component\Finder\Finder;
 

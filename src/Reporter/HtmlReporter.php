@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Reporter;
+namespace ThinkUpgrade\Reporter;
 
-use PHPLift\Analyzer\FileAnalysis;
+use ThinkUpgrade\Analyzer\FileAnalysis;
 
 final class HtmlReporter implements ReporterInterface
 {
@@ -73,7 +73,7 @@ th { background: #fafafa; }
 <h2>涉及文件</h2>
 <table><tr><th>文件</th><th>问题数</th></tr>{$fileRows}</table>
 
-<footer><p>由 <a href="https://github.com/zhangpanda/thinkphp-upgrade">PHPLift</a> 生成</p></footer>
+<footer><p>由 <a href="https://github.com/zhangpanda/thinkphp-upgrade">ThinkUpgrade</a> 生成</p></footer>
 </body>
 </html>
 HTML;

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests\Integration;
+namespace ThinkUpgrade\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\Engine\MigrationPlan;
-use PHPLift\Scanner\ProjectScanner;
-use PHPLift\Template\TemplateMigrator;
-use PHPLift\Transformer\CodeTransformer;
+use ThinkUpgrade\Engine\MigrationPlan;
+use ThinkUpgrade\Scanner\ProjectScanner;
+use ThinkUpgrade\Template\TemplateMigrator;
+use ThinkUpgrade\Transformer\CodeTransformer;
 use Symfony\Component\Finder\Finder;
 
 /**

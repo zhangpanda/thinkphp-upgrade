@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Reporter;
+namespace ThinkUpgrade\Reporter;
 
-use PHPLift\Analyzer\FileAnalysis;
+use ThinkUpgrade\Analyzer\FileAnalysis;
 
 interface ReporterInterface
 {

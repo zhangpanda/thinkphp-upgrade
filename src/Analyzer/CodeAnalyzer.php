@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Analyzer;
+namespace ThinkUpgrade\Analyzer;
 
 use PhpParser\Error;
 use PhpParser\Node;
@@ -12,7 +12,7 @@ use PhpParser\Node\Name;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
 use PhpParser\ParserFactory;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 final class CodeAnalyzer
 {

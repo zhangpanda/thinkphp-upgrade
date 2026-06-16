@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests;
+namespace ThinkUpgrade\Tests;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\AI\AIAssistManager;
-use PHPLift\AI\AISuggestion;
-use PHPLift\AI\MigrationContext;
-use PHPLift\AI\OpenAIProvider;
-use PHPLift\Analyzer\FileAnalysis;
-use PHPLift\Analyzer\Issue;
-use PHPLift\Reporter\ConsoleReporter;
-use PHPLift\Reporter\JsonReporter;
+use ThinkUpgrade\AI\AIAssistManager;
+use ThinkUpgrade\AI\AISuggestion;
+use ThinkUpgrade\AI\MigrationContext;
+use ThinkUpgrade\AI\OpenAIProvider;
+use ThinkUpgrade\Analyzer\FileAnalysis;
+use ThinkUpgrade\Analyzer\Issue;
+use ThinkUpgrade\Reporter\ConsoleReporter;
+use ThinkUpgrade\Reporter\JsonReporter;
 
 final class AIAndReporterTest extends TestCase
 {

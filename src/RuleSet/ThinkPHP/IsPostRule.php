@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\ConstFetch;
@@ -10,7 +10,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * IS_POST → $request->isPost()

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\AI;
+namespace ThinkUpgrade\AI;
 
 final readonly class MigrationContext
 {

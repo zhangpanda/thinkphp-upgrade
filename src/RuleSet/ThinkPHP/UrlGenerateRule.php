@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet\ThinkPHP;
+namespace ThinkUpgrade\RuleSet\ThinkPHP;
 
 use PhpParser\Node;
 use PhpParser\Node\Arg;
@@ -10,7 +10,7 @@ use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * U('Module/Controller/action')  → url('controller/action')

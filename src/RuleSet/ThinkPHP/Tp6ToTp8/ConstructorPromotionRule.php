@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet\ThinkPHP\Tp6ToTp8;
+namespace ThinkUpgrade\RuleSet\ThinkPHP\Tp6ToTp8;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Assign;
@@ -14,7 +14,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * Converts property declarations + constructor assignments to PHP 8 constructor promotion.

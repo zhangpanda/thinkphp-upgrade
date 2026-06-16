@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPLift\\": "src/"
+            "ThinkUpgrade\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPLift\\Tests\\": "tests/"
+            "ThinkUpgrade\\Tests\\": "tests/"
         }
     }
 }

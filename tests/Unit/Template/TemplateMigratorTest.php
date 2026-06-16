@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Tests\Unit\Template;
+namespace ThinkUpgrade\Tests\Unit\Template;
 
 use PHPUnit\Framework\TestCase;
-use PHPLift\Template\TemplateMigrator;
+use ThinkUpgrade\Template\TemplateMigrator;
 
 final class TemplateMigratorTest extends TestCase
 {

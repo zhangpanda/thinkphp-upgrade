@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\RuleSet\ThinkPHP\Tp5ToTp6;
+namespace ThinkUpgrade\RuleSet\ThinkPHP\Tp5ToTp6;
 
 use PhpParser\Node;
 use PhpParser\Node\Name as NodeName;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\NodeVisitorAbstract;
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 /**
  * TP6 removed the module concept:

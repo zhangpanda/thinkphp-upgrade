@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Analyzer;
+namespace ThinkUpgrade\Analyzer;
 
 final readonly class Issue
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Template;
+namespace ThinkUpgrade\Template;
 
 final readonly class TemplateResult
 {

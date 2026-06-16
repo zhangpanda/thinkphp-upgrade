@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPLift\Engine;
+namespace ThinkUpgrade\Engine;
 
-use PHPLift\RuleSet\RuleInterface;
+use ThinkUpgrade\RuleSet\RuleInterface;
 
 final readonly class MigrationStep
 {
