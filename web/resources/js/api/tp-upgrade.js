@@ -1,4 +1,4 @@
-const BASE = '/api/phplift'
+const BASE = '/api/tp-upgrade'
 
 export async function scanProject(path) {
   const res = await fetch(`${BASE}/projects`, {

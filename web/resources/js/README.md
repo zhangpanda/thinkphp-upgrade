@@ -20,7 +20,7 @@ web/resources/js/
 │   ├── RuleList.vue          # 规则列表/过滤
 │   └── StepNav.vue           # 顶部步骤导航
 └── api/
-    └── phplift.js            # API 调用封装
+    └── tp-upgrade.js            # API 调用封装
 ```
 
 ## 路由定义

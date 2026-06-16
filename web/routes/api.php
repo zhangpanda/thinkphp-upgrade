@@ -12,7 +12,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('api/phplift')->group(function () {
+Route::prefix('api/tp-upgrade')->group(function () {
     // 项目管理
     Route::post('/projects', 'ProjectController@store');       // 导入项目
     Route::get('/projects/{id}', 'ProjectController@show');    // 项目详情

@@ -12,7 +12,7 @@
 If you discover a security vulnerability, please report it responsibly:
 
 1. **Do NOT** open a public GitHub issue
-2. Email: security@phplift.dev (or use GitHub Security Advisories)
+2. Email: security@thinkphp-upgrade.dev (or use GitHub Security Advisories)
 3. Include: description, reproduction steps, and potential impact
 4. We will acknowledge within 48 hours and provide a fix timeline within 7 days
 

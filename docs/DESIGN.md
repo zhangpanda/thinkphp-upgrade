@@ -1208,9 +1208,9 @@ tp-upgrade transform /var/www/old-shop --target thinkphp:6.0 --ai
 ## 4. 目录结构
 
 ```
-phplift/
+thinkphp-upgrade/
 ├── bin/
-│   └── phplift                     # CLI 入口
+│   └── tp-upgrade                  # CLI 入口
 ├── src/
 │   ├── Scanner/
 │   │   ├── ProjectScanner.php
@@ -1299,7 +1299,7 @@ phplift/
 │       ├── tp32-sample/
 │       └── tp51-sample/
 ├── config/
-│   ├── phplift.php                  # 默认配置
+│   ├── tp-upgrade.php               # 默认配置
 │   └── rules.php                    # 规则配置
 ├── composer.json
 ├── phpunit.xml.dist

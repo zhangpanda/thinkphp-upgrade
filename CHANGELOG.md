@@ -44,7 +44,7 @@
 - 项目扫描器：自动检测 ThinkPHP 版本（composer.json + 特征文件）
 - AST 代码分析引擎
 - AST 代码转换引擎（dry-run + 自动备份）
-- CLI 工具：`phplift analyze` + `phplift transform`
+- CLI 工具：`tp-upgrade analyze` + `tp-upgrade transform`
 
 **内置规则（7 条）：**
 - `tp3-add-namespace` — 添加命名空间
