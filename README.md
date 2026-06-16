@@ -1,4 +1,4 @@
-# PHPLift — AI 驱动的 PHP 代码迁移工具
+# ThinkPHP-Upgrade — AI 驱动的 PHP 代码迁移工具
 
 > 让 ThinkPHP 3.x → 6.x/8.x 迁移变得安全、可控、高效
 
@@ -12,7 +12,7 @@
 - ThinkPHP 3.x 不再维护
 - 手动升级费时费力，容易出错
 
-PHPLift 通过 **AST 分析 + 规则驱动转换 + AI 辅助** 自动完成 80%+ 的代码迁移工作。
+ThinkPHP-Upgrade 通过 **AST 分析 + 规则驱动转换 + AI 辅助** 自动完成 80%+ 的代码迁移工作。
 
 ## 特性
 
@@ -26,14 +26,14 @@ PHPLift 通过 **AST 分析 + 规则驱动转换 + AI 辅助** 自动完成 80%+
 ## 安装
 
 ```bash
-git clone git@github.com:zhangpanda/phplift.git
-cd phplift
+git clone git@github.com:zhangpanda/thinkphp-upgrade.git
+cd thinkphp-upgrade
 composer install
 ```
 
 全局可用（可选）：
 ```bash
-ln -s $(pwd)/bin/phplift /usr/local/bin/phplift
+ln -s $(pwd)/bin/tp-upgrade /usr/local/bin/tp-upgrade
 ```
 
 ## 快速使用
@@ -41,7 +41,7 @@ ln -s $(pwd)/bin/phplift /usr/local/bin/phplift
 ### 1. 分析项目
 
 ```bash
-phplift analyze /var/www/old-shop
+tp-upgrade analyze /var/www/old-shop
 ```
 
 输出：
@@ -59,19 +59,19 @@ phplift analyze /var/www/old-shop
 ### 2. 预览转换
 
 ```bash
-phplift transform /var/www/old-shop --dry-run
+tp-upgrade transform /var/www/old-shop --dry-run
 ```
 
 ### 3. 一键迁移（推荐）
 
 ```bash
-phplift migrate /var/www/old-shop --target 8.0
+tp-upgrade migrate /var/www/old-shop --target 8.0
 ```
 
 输出：
 ```
 ═══════════════════════════════════════
-  PHPLift Migration Report
+  ThinkPHP-Upgrade Migration Report
 ═══════════════════════════════════════
   Files scanned:     722
   Files changed:     600
@@ -85,7 +85,7 @@ Need manual review:
       → $this->success/error() needs manual replacement
       → $request variable needs injection (add Request $request parameter)
 
-📄 Report saved to: phplift-report.json
+📄 Report saved to: tp-upgrade-report.json
 ```
 
 `migrate` 命令会自动完成：
@@ -98,7 +98,7 @@ Need manual review:
 ### 3. 执行转换
 
 ```bash
-phplift transform /var/www/old-shop
+tp-upgrade transform /var/www/old-shop
 ```
 
 转换前自动生成 `.bak` 备份文件。
@@ -171,11 +171,11 @@ class UserController extends \think\BaseController
 
 ## AI 辅助
 
-对于无法通过规则自动转换的复杂场景，PHPLift 支持调用 AI：
+对于无法通过规则自动转换的复杂场景，ThinkPHP-Upgrade 支持调用 AI：
 
 ```bash
 export DEEPSEEK_API_KEY=sk-xxx  # 国内推荐 DeepSeek
-phplift transform /path/to/project --ai
+tp-upgrade transform /path/to/project --ai
 ```
 
 AI 辅助场景：
@@ -202,7 +202,7 @@ src/
 
 ## 配置
 
-项目根目录创建 `phplift.json`（可选）：
+项目根目录创建 `tp-upgrade.json`（可选）：
 
 ```json
 {
@@ -226,7 +226,7 @@ composer install
 vendor/bin/phpunit
 
 # 试运行
-php bin/phplift analyze tests/Fixtures/tp32-sample
+php bin/tp-upgrade analyze tests/Fixtures/tp32-sample
 ```
 
 ## 路线图
@@ -246,7 +246,7 @@ php bin/phplift analyze tests/Fixtures/tp32-sample
 
 **Q: 转换后代码能直接运行吗？**
 
-A: PHPLift 处理约 80% 的自动化转换。剩余部分（路由配置、中间件注册、composer.json 依赖）需要手动调整。建议先 `--dry-run` 预览。
+A: ThinkPHP-Upgrade 处理约 80% 的自动化转换。剩余部分（路由配置、中间件注册、composer.json 依赖）需要手动调整。建议先 `--dry-run` 预览。
 
 **Q: 支持 Laravel 迁移吗？**
 

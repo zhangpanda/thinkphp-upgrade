@@ -1,11 +1,11 @@
 # Web UI 使用指南
 
-PHPLift 内置交互式 Web UI，让你逐条审查、确认或跳过每个代码变更。
+ThinkPHP-Upgrade 内置交互式 Web UI，让你逐条审查、确认或跳过每个代码变更。
 
 ## 启动
 
 ```bash
-phplift serve /var/www/old-shop --target 8.0
+tp-upgrade serve /var/www/old-shop --target 8.0
 ```
 
 选项：
@@ -60,7 +60,7 @@ phplift serve /var/www/old-shop --target 8.0
 
 ## 概述
 
-PHPLift 支持 ThinkPHP 3.x 模板语法（XML 标签风格）自动转换为 ThinkPHP 6.x/8.x 的花括号语法。
+ThinkPHP-Upgrade 支持 ThinkPHP 3.x 模板语法（XML 标签风格）自动转换为 ThinkPHP 6.x/8.x 的花括号语法。
 
 ## 支持的转换
 
@@ -87,7 +87,7 @@ PHPLift 支持 ThinkPHP 3.x 模板语法（XML 标签风格）自动转换为 Th
 ### 集成在 migrate 命令中（推荐）
 
 ```bash
-phplift migrate /var/www/old-shop --target 8.0 --write
+tp-upgrade migrate /var/www/old-shop --target 8.0 --write
 ```
 
 `migrate` 命令会自动扫描 `.html` 和 `.tpl` 文件并转换模板语法。报告中会显示：

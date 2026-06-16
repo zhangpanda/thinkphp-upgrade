@@ -82,7 +82,7 @@ final class AIAndReporterTest extends TestCase
         $reporter = new ConsoleReporter();
         $output = $reporter->generate($analyses);
 
-        $this->assertStringContainsString('PHPLift Migration Report', $output);
+        $this->assertStringContainsString('ThinkPHP-Upgrade Migration Report', $output);
         $this->assertStringContainsString('Auto-fixable:  1', $output);
         $this->assertStringContainsString('tp3-model-call: 1', $output);
     }

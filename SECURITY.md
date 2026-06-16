@@ -19,12 +19,12 @@ If you discover a security vulnerability, please report it responsibly:
 ## Security Considerations
 
 ### File System Access
-- PHPLift reads and writes PHP source files on the local filesystem
+- ThinkPHP-Upgrade reads and writes PHP source files on the local filesystem
 - The `serve` command restricts file access to the specified project directory
 - Path traversal is prevented via `realpath()` validation
 - All file writes create `.bak` backups before modification
 
-### Web UI (`phplift serve`)
+### Web UI (`tp-upgrade serve`)
 - Intended for **local development use only** — do not expose to the internet
 - CSRF protection on all state-changing API endpoints
 - No authentication (assumes single-user local access)
@@ -37,7 +37,7 @@ If you discover a security vulnerability, please report it responsibly:
 - AI responses should be reviewed before accepting
 
 ### Generated Code
-- PHPLift generates syntactically valid PHP but does NOT guarantee:
+- ThinkPHP-Upgrade generates syntactically valid PHP but does NOT guarantee:
   - Runtime correctness
   - Security of generated patterns
   - Compatibility with all framework extensions
@@ -56,7 +56,7 @@ Before v1.0, minor versions may include breaking changes. All breaking changes a
 | Component | Stability |
 |-----------|-----------|
 | CLI commands (`analyze`, `transform`, `migrate`) | 🟡 Stable |
-| `phplift serve` (Web UI) | 🟠 Experimental |
+| `tp-upgrade serve` (Web UI) | 🟠 Experimental |
 | TP3→TP6 rules (7 rules) | 🟡 Stable |
 | TP5→TP6 rules | 🟡 Stable |
 | TP6→TP8 rules | 🟠 Experimental |

@@ -1,19 +1,19 @@
-# PHPLift — AI 驱动的 PHP 代码现代化迁移工具设计文档
+# ThinkPHP-Upgrade — AI 驱动的 PHP 代码现代化迁移工具设计文档
 
 ## 1. 项目概览
 
 | 项目 | 信息 |
 |------|------|
-| 名称 | PHPLift |
+| 名称 | ThinkPHP-Upgrade |
 | 定位 | AI 驱动的 PHP 框架迁移与代码现代化工具 |
 | 一句话 | 通过 AST 分析 + AI 辅助 + 交互式 Web UI，让 ThinkPHP 全版本迁移和 PHP 升级变得安全、可控、高效 |
 | 目标用户 | 维护 ThinkPHP 3.x/5.x 老项目的开发团队、PHP 版本升级的企业、外包公司 |
 | 技术要求 | PHP >= 8.1, nikic/php-parser ^5.0 |
 | License | MIT |
 
-### 为什么需要 PHPLift？
+### 为什么需要 ThinkPHP-Upgrade？
 
-| 特性 | PHPLift | Rector | PHP-CS-Fixer |
+| 特性 | ThinkPHP-Upgrade | Rector | PHP-CS-Fixer |
 |------|---------|--------|--------------|
 | ThinkPHP 迁移 | ✅ 全版本 (TP3→TP8) | ❌ | ❌ |
 | Web UI 可视化 | ✅ 交互式 diff | ❌ CLI only | ❌ |
@@ -1166,10 +1166,10 @@ final class TransformCommand extends Command
 
 ```bash
 # 1. 安装
-git clone git@github.com:zhangpanda/phplift.git && cd phplift && composer install
+git clone git@github.com:zhangpanda/thinkphp-upgrade.git && cd phplift && composer install
 
 # 2. 分析项目
-phplift analyze /var/www/old-shop --target thinkphp:6.0
+tp-upgrade analyze /var/www/old-shop --target thinkphp:6.0
 
 # 输出:
 # 🔍 扫描项目: /var/www/old-shop
@@ -1193,14 +1193,14 @@ phplift analyze /var/www/old-shop --target thinkphp:6.0
 #  ...
 
 # 3. 预览转换结果
-phplift transform /var/www/old-shop --target thinkphp:6.0 --dry-run
+tp-upgrade transform /var/www/old-shop --target thinkphp:6.0 --dry-run
 
 # 4. 执行转换（带备份）
-phplift transform /var/www/old-shop --target thinkphp:6.0 --backup ./backup/
+tp-upgrade transform /var/www/old-shop --target thinkphp:6.0 --backup ./backup/
 
 # 5. 启用 AI 辅助处理复杂场景
 export OPENAI_API_KEY=sk-xxx
-phplift transform /var/www/old-shop --target thinkphp:6.0 --ai
+tp-upgrade transform /var/www/old-shop --target thinkphp:6.0 --ai
 ```
 
 ---
@@ -1312,9 +1312,9 @@ phplift/
 
 ```json
 {
-    "name": "phplift/phplift",
+    "name": "zhangpanda/thinkphp-upgrade",
     "description": "AI-powered PHP code modernization and framework migration tool",
-    "bin": ["bin/phplift"],
+    "bin": ["bin/tp-upgrade"],
     "require": {
         "php": "^8.1",
         "nikic/php-parser": "^5.0",
@@ -1500,7 +1500,7 @@ class User extends BaseController
 }
 ```
 
-**变更摘要 (PHPLift 报告):**
+**变更摘要 (ThinkPHP-Upgrade 报告):**
 
 | # | 规则 | 变更 | 模式 |
 |---|------|------|------|

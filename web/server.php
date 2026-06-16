@@ -1,7 +1,7 @@
 <?php
 
 /**
- * PHPLift Built-in Web Server Router
+ * ThinkPHP-Upgrade Built-in Web Server Router
  *
  * Usage: php -S 0.0.0.0:8190 -t web/ web/server.php
  * Env:   PHPLIFT_PROJECT=/path/to/project PHPLIFT_TARGET=8.0

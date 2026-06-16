@@ -43,7 +43,7 @@ final class HtmlReporter implements ReporterInterface
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>PHPLift 迁移报告</title>
+<title>ThinkPHP-Upgrade 迁移报告</title>
 <style>
 body { font-family: -apple-system, "Microsoft YaHei", sans-serif; max-width: 900px; margin: 2em auto; padding: 0 1em; color: #333; }
 h1 { border-bottom: 2px solid #1677ff; padding-bottom: 0.5em; }
@@ -59,7 +59,7 @@ th { background: #fafafa; }
 </style>
 </head>
 <body>
-<h1>📊 PHPLift 迁移报告</h1>
+<h1>📊 ThinkPHP-Upgrade 迁移报告</h1>
 
 <div class="stats">
   <div class="stat blue"><div class="num">{$totalIssues}</div><div>总问题数</div></div>
@@ -73,7 +73,7 @@ th { background: #fafafa; }
 <h2>涉及文件</h2>
 <table><tr><th>文件</th><th>问题数</th></tr>{$fileRows}</table>
 
-<footer><p>由 <a href="https://github.com/phplift/phplift">PHPLift</a> 生成</p></footer>
+<footer><p>由 <a href="https://github.com/zhangpanda/thinkphp-upgrade">PHPLift</a> 生成</p></footer>
 </body>
 </html>
 HTML;

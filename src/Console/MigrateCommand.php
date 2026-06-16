@@ -23,7 +23,7 @@ final class MigrateCommand extends Command
             ->setDescription('Transform code + syntax check + generate migration report')
             ->addArgument('path', InputArgument::REQUIRED, 'Project path')
             ->addOption('target', 't', InputOption::VALUE_REQUIRED, 'Target version', '8.0')
-            ->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Report output file (json)', 'phplift-report.json')
+            ->addOption('output', 'o', InputOption::VALUE_REQUIRED, 'Report output file (json)', 'tp-upgrade-report.json')
             ->addOption('write', 'w', InputOption::VALUE_NONE, 'Actually write transformed files (default is dry-run)');
     }
 

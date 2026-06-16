@@ -1,8 +1,8 @@
-# PHPLift 规则手册
+# ThinkPHP-Upgrade 规则手册
 
 ## 规则总览
 
-PHPLift 内置 13 条迁移规则，覆盖 ThinkPHP 3.2 → 8.0 全路径。
+ThinkPHP-Upgrade 内置 13 条迁移规则，覆盖 ThinkPHP 3.2 → 8.0 全路径。
 
 ## ThinkPHP 3.2 → 5.1
 

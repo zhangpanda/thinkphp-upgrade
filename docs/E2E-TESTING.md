@@ -1,12 +1,12 @@
-# PHPLift 端到端验证指南
+# ThinkPHP-Upgrade 端到端验证指南
 
-本文档描述如何搭建 Docker 环境，验证 PHPLift 的 ThinkPHP 3.2 → 5.1 → 6.0 → 8.x 全路径迁移。
+本文档描述如何搭建 Docker 环境，验证 ThinkPHP-Upgrade 的 ThinkPHP 3.2 → 5.1 → 6.0 → 8.x 全路径迁移。
 
 ## 前置要求
 
 - Docker（colima / Docker Desktop）
 - MySQL client（可选，用于调试）
-- PHP 8.1+（宿主机上运行 PHPLift）
+- PHP 8.1+（宿主机上运行 ThinkPHP-Upgrade）
 
 ## 验证架构
 
@@ -315,30 +315,30 @@ TP8.x: <h1>TP8 Demo (migrated from TP6) - 用户列表 (共2人)</h1>
 
 ---
 
-## 使用 PHPLift 进行代码转换
+## 使用 ThinkPHP-Upgrade 进行代码转换
 
 ### 分析
 
 ```bash
-phplift analyze tp3-app/Application/Home/Controller/IndexController.class.php
+tp-upgrade analyze tp3-app/Application/Home/Controller/IndexController.class.php
 ```
 
 ### 分步转换
 
 ```bash
 # TP3 → TP5.1
-phplift transform tp3-app/ --target 5.1 --dry-run
+tp-upgrade transform tp3-app/ --target 5.1 --dry-run
 
 # TP3 → TP6
-phplift transform tp3-app/ --target 6.0 --dry-run
+tp-upgrade transform tp3-app/ --target 6.0 --dry-run
 
 # TP3 → TP8（全路径）
-phplift transform tp3-app/ --target 8.0 --dry-run
+tp-upgrade transform tp3-app/ --target 8.0 --dry-run
 ```
 
-### PHPLift 转换 vs 手动适配
+### ThinkPHP-Upgrade 转换 vs 手动适配
 
-| 步骤 | PHPLift 自动完成 | 需要手动适配 |
+| 步骤 | ThinkPHP-Upgrade 自动完成 | 需要手动适配 |
 |------|-----------------|-------------|
 | M()/D() → Db/Model | ✅ | — |
 | C() → config() | ✅ | — |

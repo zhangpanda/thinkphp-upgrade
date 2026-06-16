@@ -50,7 +50,7 @@ final class ServeCommand extends Command
             return Command::FAILURE;
         }
 
-        $output->writeln("🚀 PHPLift Web UI");
+        $output->writeln("🚀 ThinkPHP-Upgrade Web UI");
         $output->writeln("   Project: {$path}");
         $output->writeln("   Target:  {$target}");
         $output->writeln("   URL:     <info>http://localhost:{$port}</info>");

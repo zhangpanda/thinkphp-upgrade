@@ -1,10 +1,10 @@
 <?php
 
 /**
- * PHPLift Web UI API Routes
+ * ThinkPHP-Upgrade Web UI API Routes
  *
  * 用于 Laravel 11 后端，安装方式：
- *   composer require phplift/phplift
+ *   # see README for install
  *   php artisan vendor:publish --tag=phplift-routes
  *
  * 以下为路由定义骨架，需要在 Laravel 项目中注册。

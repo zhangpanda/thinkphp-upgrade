@@ -26,7 +26,7 @@ final class ConsoleReporter implements ReporterInterface
 
         $lines = [
             '═══════════════════════════════════════',
-            ' PHPLift Migration Report',
+            ' ThinkPHP-Upgrade Migration Report',
             '═══════════════════════════════════════',
             " Files analyzed: " . count($analyses),
             " 🟢 Auto-fixable:  {$autoFixable}",

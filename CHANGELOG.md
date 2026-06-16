@@ -4,7 +4,7 @@
 
 ### 新功能
 
-- **Web UI** — `phplift serve /path` 启动交互式确认界面
+- **Web UI** — `tp-upgrade serve /path` 启动交互式确认界面
   - 内置 PHP Web Server，无需 Laravel 或其他框架
   - Diff 视图逐条展示变更，支持接受/跳过操作
   - JSON API（/api/project、/api/changes、confirm/skip/confirm-all）

@@ -1,12 +1,12 @@
 # 贡献指南
 
-感谢你对 PHPLift 的关注！我们特别欢迎新的迁移规则贡献。
+感谢你对 ThinkPHP-Upgrade 的关注！我们特别欢迎新的迁移规则贡献。
 
 ## 开发环境
 
 ```bash
-git clone https://github.com/zhangpanda/phplift.git
-cd phplift
+git clone https://github.com/zhangpanda/thinkphp-upgrade.git
+cd thinkphp-upgrade
 composer install
 ```
 

@@ -1,4 +1,4 @@
-# PHPLift Web UI 前端结构
+# ThinkPHP-Upgrade Web UI 前端结构
 
 技术栈：Vue 3 + Vite + Arco Design + Monaco Editor
 

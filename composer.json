@@ -1,9 +1,9 @@
 {
-    "name": "phplift/phplift",
-    "description": "AI-powered PHP code modernization and framework migration tool",
+    "name": "zhangpanda/thinkphp-upgrade",
+    "description": "AI-powered ThinkPHP code modernization and upgrade tool",
     "type": "project",
     "license": "Apache-2.0",
-    "bin": ["bin/phplift"],
+    "bin": ["bin/tp-upgrade"],
     "require": {
         "php": "^8.2",
         "nikic/php-parser": "^5.0",
