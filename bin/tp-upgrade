@@ -5,13 +5,13 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use PHPLift\Console\AnalyzeCommand;
-use PHPLift\Console\MigrateCommand;
-use PHPLift\Console\ServeCommand;
-use PHPLift\Console\TransformCommand;
+use ThinkUpgrade\Console\AnalyzeCommand;
+use ThinkUpgrade\Console\MigrateCommand;
+use ThinkUpgrade\Console\ServeCommand;
+use ThinkUpgrade\Console\TransformCommand;
 use Symfony\Component\Console\Application;
 
-$app = new Application('PHPLift', '0.1.0');
+$app = new Application('ThinkPHP-Upgrade', '0.3.0');
 $app->add(new AnalyzeCommand());
 $app->add(new TransformCommand());
 $app->add(new MigrateCommand());
