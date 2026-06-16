@@ -108,7 +108,7 @@ final class MigrateCommand extends Command
             $report['changed_files'][] = $relativePath;
 
             // 语法检查
-            $tmp = tempnam(sys_get_temp_dir(), 'phplift_lint_');
+            $tmp = tempnam(sys_get_temp_dir(), 'tpup_lint_');
             if ($tmp === false) {
                 $report['syntax_errors'][] = [
                     'file' => $relativePath,

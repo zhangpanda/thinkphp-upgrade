@@ -38,7 +38,7 @@ class OrderService
     }
 }
 PHP;
-        $tmp = tempnam(sys_get_temp_dir(), 'phplift_chain_');
+        $tmp = tempnam(sys_get_temp_dir(), 'tpup_chain_');
         file_put_contents($tmp, $code);
 
         $steps = MigrationPlan::compute('3.2', '8.0');
@@ -75,7 +75,7 @@ PHP;
         $this->assertStringNotContainsString('$this->repo = $repo', $result->newCode);
 
         // Verify syntax is valid
-        $tmp2 = tempnam(sys_get_temp_dir(), 'phplift_lint_');
+        $tmp2 = tempnam(sys_get_temp_dir(), 'tpup_lint_');
         file_put_contents($tmp2, $result->newCode);
         exec("php -l {$tmp2} 2>&1", $out, $exitCode);
         unlink($tmp2);

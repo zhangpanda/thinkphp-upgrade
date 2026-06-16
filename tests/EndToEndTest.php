@@ -84,7 +84,7 @@ final class EndToEndTest extends TestCase
         $result = $this->transformer->transformFile($file, $this->allRules, dryRun: true);
 
         // Write to temp and verify syntax
-        $tmp = tempnam(sys_get_temp_dir(), 'phplift_test_');
+        $tmp = tempnam(sys_get_temp_dir(), 'tpup_test_');
         file_put_contents($tmp, $result->newCode);
 
         exec("php -l {$tmp} 2>&1", $output, $exitCode);

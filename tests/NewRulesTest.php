@@ -32,7 +32,7 @@ final class NewRulesTest extends TestCase
     {
         // Create a temp file with IS_POST
         $code = "<?php\nif (IS_POST) { echo 'yes'; }\n";
-        $tmp = tempnam(sys_get_temp_dir(), 'phplift_');
+        $tmp = tempnam(sys_get_temp_dir(), 'tpup_');
         file_put_contents($tmp, $code);
 
         $result = $this->transformer->transformFile($tmp, [new IsPostRule()], dryRun: true);

@@ -24,7 +24,7 @@ final class ApiHandler
             throw new \InvalidArgumentException("Invalid project path: {$this->projectPath}");
         }
 
-        $this->stateFile = sys_get_temp_dir() . '/phplift_' . md5($real) . '.json';
+        $this->stateFile = sys_get_temp_dir() . '/tpup_' . md5($real) . '.json';
         $this->csrfToken = $this->loadOrCreateCsrfToken();
     }
 
@@ -223,7 +223,7 @@ final class ApiHandler
 
     private function loadOrCreateCsrfToken(): string
     {
-        $tokenFile = sys_get_temp_dir() . '/phplift_csrf_' . md5($this->projectPath) . '.txt';
+        $tokenFile = sys_get_temp_dir() . '/tpup_csrf_' . md5($this->projectPath) . '.txt';
         if (file_exists($tokenFile)) {
             return file_get_contents($tokenFile);
         }

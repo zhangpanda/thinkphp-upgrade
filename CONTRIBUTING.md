@@ -59,7 +59,7 @@ final class YourRule implements RuleInterface
 public function testYourRule(): void
 {
     $code = "<?php\n// 转换前代码";
-    $tmp = tempnam(sys_get_temp_dir(), 'phplift_');
+    $tmp = tempnam(sys_get_temp_dir(), 'tpup_');
     file_put_contents($tmp, $code);
 
     $transformer = new CodeTransformer();

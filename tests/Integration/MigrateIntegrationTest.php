@@ -64,7 +64,7 @@ final class MigrateIntegrationTest extends TestCase
                 $results[] = $result;
 
                 // Verify syntax
-                $tmp = tempnam(sys_get_temp_dir(), 'phplift_int_');
+                $tmp = tempnam(sys_get_temp_dir(), 'tpup_int_');
                 file_put_contents($tmp, $result->newCode);
                 exec("php -l {$tmp} 2>&1", $output, $exitCode);
                 unlink($tmp);
@@ -117,7 +117,7 @@ final class MigrateIntegrationTest extends TestCase
     {
         // Create a temp template fixture
         $tplContent = '<volist name="list" id="vo"><li>{$vo.name}</li></volist><script src="__PUBLIC__/js/app.js"></script>';
-        $tmp = tempnam(sys_get_temp_dir(), 'phplift_tpl_');
+        $tmp = tempnam(sys_get_temp_dir(), 'tpup_tpl_');
         file_put_contents($tmp, $tplContent);
 
         $migrator = new TemplateMigrator();

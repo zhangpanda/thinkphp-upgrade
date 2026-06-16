@@ -53,7 +53,7 @@ tp-upgrade serve /var/www/old-shop --target 8.0
 ## 注意事项
 
 - 首次加载 `/api/changes` 时会执行全量 dry-run 转换，项目文件多时需等待
-- 状态存储在系统临时目录（`/tmp/phplift_xxx.json`），关闭服务后重启可恢复
+- 状态存储在系统临时目录（`/tmp/tpup_xxx.json`），关闭服务后重启可恢复
 - 写入操作不可撤销（但有 .bak 文件），建议在 Git 仓库中使用
 
 # 模板文件迁移
