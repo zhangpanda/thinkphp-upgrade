@@ -24,6 +24,7 @@ use PHPLift\RuleSet\RuleInterface;
 final class ConfigCallRule implements RuleInterface
 {
     private const KEY_MAP = [
+        // Database
         'DB_TYPE' => 'database.connections.mysql.type',
         'DB_HOST' => 'database.connections.mysql.hostname',
         'DB_NAME' => 'database.connections.mysql.database',
@@ -32,6 +33,21 @@ final class ConfigCallRule implements RuleInterface
         'DB_PORT' => 'database.connections.mysql.hostport',
         'DB_PREFIX' => 'database.connections.mysql.prefix',
         'DB_CHARSET' => 'database.connections.mysql.charset',
+        // Session
+        'SESSION_PREFIX' => 'session.prefix',
+        'SESSION_AUTO_START' => 'session.auto_start',
+        // Cache
+        'CACHE_TYPE' => 'cache.default',
+        'CACHE_PREFIX' => 'cache.stores.file.prefix',
+        'CACHE_EXPIRE' => 'cache.stores.file.expire',
+        // App
+        'DEFAULT_MODULE' => 'app.default_app',
+        'DEFAULT_CONTROLLER' => 'route.default_controller',
+        'DEFAULT_ACTION' => 'route.default_action',
+        'URL_MODEL' => 'route.url_domain_deploy',
+        'PAGE_SIZE' => 'app.page_size',
+        // Payment/misc often project-specific
+        'DEFAULT_PAYMENT' => 'app.default_payment',
     ];
 
     public function name(): string { return 'tp3-config-call'; }

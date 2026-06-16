@@ -153,7 +153,9 @@ final class ApiHandler
                     continue;
                 }
                 @file_put_contents($filePath . '.bak', $change['originalCode']);
-                @file_put_contents($filePath, $change['newCode']);
+                if (@file_put_contents($filePath, $change['newCode']) === false) {
+                    continue;
+                }
                 $applied++;
             }
         }
